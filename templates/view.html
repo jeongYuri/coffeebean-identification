@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://bootstrapk.com/examples/starter-template/# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://bootstrapk.com/favicon.ico">
+ 
+    <title>인공지능_바리스따</title>
+ 
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <!-- Custom styles for this template -->
+    <link href="/static/css/starter-template.css" rel="stylesheet">
+ 
+  </head>
+ 
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">바리스따</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a>김혜선</a></li>
+            <li><a>정유리</a></li>
+            <li><a>인공지능 프로젝트</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+ 
+    <div class="container">
+      <div class="starter-template">
+        <h1>원두 구별하기</h1>
+        <p class="lead">딥러닝을 활용하여 원두 판별하기<br>생두, 라이트, 미디엄, 다크 로스팅을 확인해볼 수 있습니다!:]</p>
+      </div>
+      <form id ="Upload" action="/predict" method="POST" enctype="multipart/form-data">
+        <div class="button">
+        </div>
+        <input type="file" value = "Upload" name="image" onchange="loadFile(event);"/>
+        <div id="image_container"></div>
+        <input type="submit" id="submitButton" onclick='showImage()'/></a> 
+        <p id="ha">커피의 결과가 궁금하나요?</p>        
+      </form>
+      <div class="image-show" id="image-show">
+      </div>
+      <button id="coffffee" type="button" onclick="alert('커피의 상태는 {{data}}로스팅된 상태입니다!')">결과보기</button>
+      <p id="si">    </p>   
+    </div><!-- /.container -->
+    <script>
+      var submit = document.getElementById('submitButton');
+      submit.onclick = showImage;     //Submit 버튼 클릭시 이미지 보여주기
+     function showImage() {
+      document.getElementById('ha').innerHTML='결과가 궁금하다면 결과보기를 누르세요!';
+       var img = document.getElementById('image-show').lastElementChild;
+       img.style.visibility = "visible";   
+       document.getElementById('upload').style.visibility = 'hidden';
+       document.getElementById('fileName').textContent = null;     //기존 파일 이름 지우기
+      }
+      function result(){
+        document.getElementById('si').innerHTML='커피의 상태는 {{data}}로스팅된 상태입니다!';
+      }
+      function loadFile(event) {
+        var reader = new FileReader();     
+        reader.onload = function(event) {
+        var img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        document.querySelector("div#image_container").appendChild(img);
+        img.src = URL.createObjectURL(file); 
+        img.style.width = "70%";
+        img.style.height = "70%";
+        img.style.visibility = "hidden";   //버튼을 누르기 전까지는 이미지 숨기기
+        img.style.objectFit = "contain";
+        var container = document.getElementById('image-show');
+        container.appendChild(img);
+          
+        };    
+        reader.readAsDataURL(event.target.files[0]);
+      } 
+    </script>
+ 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+ 
+</body></html>
