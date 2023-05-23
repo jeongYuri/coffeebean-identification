@@ -17,7 +17,7 @@ from imutils import paths
 
 app = Flask(__name__)
 app.secret_key="super secret key"
-app.config['UPLOAD_FOLDER'] ='C:/Users/dydrk/aii_project/venvv/static/images/'
+app.config['UPLOAD_FOLDER'] ='경로'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
@@ -28,7 +28,7 @@ def predict():
     if not file: return render_template('index.html', label="No Files") 
     #Path='C:/Users/dydrk/aii_project/venvv/static/images/'+str(file.filename)
     file.save(os.path.join(app.config['UPLOAD_FOLDER'],file.filename)) #저장시킨 파일..
-    model=keras.models.load_model('C:/Users/dydrk/aii_project/venvv/my_cofee.h5')  
+    model=keras.models.load_model('경로/my_cofee.h5')  
     Path=(os.path.join(app.config['UPLOAD_FOLDER'],file.filename))
     
     img = image.load_img(Path) #저장시킨 파일 불러오기
